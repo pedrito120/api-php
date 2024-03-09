@@ -37,10 +37,10 @@ return function (App $app) {
     });
     $app->post('/set_data', function (Request $request, Response $response, array $args) {
         $data = $request->getParsedBody();
-        if ($data) {
-            $response->getBody()->write(json_encode(['success' => true, 'message' => 'Gracias, tu informacion se guardo']));
+        if (isset($data['nombre']) && isset($data['opcion']) ){
+            $response->getBody()->write(json_encode(['success' => true, 'message' => 'Gracias '.$data['nombre'].', tu informacion se ha guardado ' ]));
         } else {
-            $response->getBody()->write(json_encode(['success' => false, 'message' => 'Error al guardar la informacion']));
+            $response->getBody()->write(json_encode(['success' => false, 'message' => 'faltan datos por enviar']));
         }
         return $response;
        
